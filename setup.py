@@ -5,10 +5,15 @@ try:
 except ImportError:
     from pip._internal import main as pipmain
 
-pipmain(['install', 'nltk'])
 
+pipmain(['install', 'nltk'])
+pipmain(['install','pathlib '])
+
+import pathlib
 import nltk
 
-nltk.download('stopwords', download_dir=".\\nltk")
-nltk.data.path.append(".\\nltk")
+path_nltk = pathlib.PurePath('.','nltk')
+
+nltk.download('stopwords', download_dir=path_nltk)
+nltk.data.path.append(path_nltk)
 
