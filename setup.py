@@ -11,9 +11,18 @@ pipmain(['install','pathlib '])
 
 import pathlib
 import nltk
-
 path_nltk = pathlib.PurePath('.','nltk')
 
+attempts: int = 0
+while attempts <3:
+    try:
+        nltk.data.path.append(path_nltk)
+        attempts = 10
+    except Exception as  e:
+        print(f'Error: {e}')
+        print(f'Attempt {attempts + 1} failed, trying again.')
+        attempts+=1
+
 nltk.download('stopwords', download_dir=path_nltk)
-nltk.data.path.append(path_nltk)
+
 
