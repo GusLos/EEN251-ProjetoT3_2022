@@ -1,0 +1,32 @@
+{
+    "commands": [
+        {
+            "tag": "light on",
+            "patterns": [
+                "acender luz",
+                "ligar luz",
+                "acender led",
+                "ligar led"
+            ],
+            "responses": [
+                "Acendendo as luzes",
+                "Ligando as luzes"
+            ]
+        },
+        {
+            "tag": "light off",
+            "patterns": [
+                "apagar luz",
+                "apagar led",
+                "desligar luz",
+                "desligar led"
+            ],
+            "responses": [
+                "Apagando as luzes",
+                "Desligando as luzes"
+            ]
+        }
+    ]
+    
+
+}
