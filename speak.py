@@ -4,7 +4,18 @@
 import pyttsx3
 
 class speak:
-    pass
+
+   def __init__(self) -> None:
+      self.engine = pyttsx3.init()
+      pass
+
+   def say(self, *phrases: list[str]) -> None:
+      for phrase in phrases:
+         self.engine.say(phrase)
+      self.engine.runAndWait()
+      pass
+
+   pass
 
 
 
@@ -43,20 +54,25 @@ class speak:
 # engine.runAndWait()
 
 
-engine = pyttsx3.init()
-def onStart(name):
-   print('starting', name)
-def onWord(name, location, length):
-   print ('word', name, location, length)
-def onEnd(name, completed):
-   print ('finishing', name, completed)
-   if name == 'raposa':
-      engine.say('Que cão preguiçoso', 'cachorro')
-   elif name == 'cachorro':
-      engine.endLoop()
-engine = pyttsx3.init()
-engine.connect('started-utterance', onStart)
-engine.connect('started-word', onWord)
-engine.connect('finished-utterance', onEnd)
-engine.say('A raposa marrom rápida saltou sobre o cão preguiçoso.', 'raposa')
-engine.startLoop()
+# engine = pyttsx3.init()
+# def onStart(name):
+#    print('starting', name)
+# def onWord(name, location, length):
+#    print ('word', name, location, length)
+# def onEnd(name, completed):
+#    print ('finishing', name, completed)
+#    if name == 'raposa':
+#       engine.say('Que cão preguiçoso', 'cachorro')
+#    elif name == 'cachorro':
+#       engine.endLoop()
+# engine = pyttsx3.init()
+# engine.connect('started-utterance', onStart)
+# engine.connect('started-word', onWord)
+# engine.connect('finished-utterance', onEnd)
+# engine.say('A raposa marrom rápida saltou sobre o cão preguiçoso.', 'raposa')
+# engine.startLoop()
+
+
+if __name__ == '__main__':
+   talk = speak()
+   talk.say(['Desculpe', 'não entendi', 'pode repetir?'])

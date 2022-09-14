@@ -1,18 +1,31 @@
 import speech_recognition as sr
-import os
 
-r = sr.Recognizer()
-m = sr.Microphone()
+class Listen:
 
+    def __init__(self, language: str) -> None:
+        self.recognizer = sr.Recognizer()
+        self.microphone = sr.Microphone()
+        self.language = language
 
-with m as source:
-    r.adjust_for_ambient_noise(source)
-    print("Say something!")
-    audio = r.listen(source)
+    def listen(self) -> sr.AudioData:
+        with self.microphone as source:
+            self.recognizer.adjust_for_ambient_noise(source)
+            audio = self.recognizer.listen(source)
+            return audio
 
-try:
-    print("Google Speech Recognition thinks you said " + r.recognize_google(audio, language='pt-BR'))
-except sr.UnknownValueError:
-     print("Google Speech Recognition could not understand audio")
-except sr.RequestError as e:
-    print("Could not request results from Google Speech Recognition service; {0}".format(e))
+    def audio_to_text_google(self, audio: sr.AudioData) -> str:
+        try:
+            return self.recognizer.recognize_google(audio, language=self.language)
+        except sr.UnknownValueError:
+            # print("Google Speech Recognition could not understand audio")
+            return 'Não foi possivel entender o audio.'
+        except sr.RequestError as e:
+            # print("Could not request results from Google Speech Recognition service; {0}".format(e))
+            return 'Erro ao processar o audio.'
+
+if __name__ == '__main__':
+
+    listen = Listen('pt-BR')
+    audio = listen.listen()
+    text = listen.audio_to_text_google(audio)
+    print(text)
