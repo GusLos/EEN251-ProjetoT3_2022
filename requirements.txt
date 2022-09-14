@@ -1,0 +1,13 @@
+click==8.1.3
+colorama==0.4.5
+comtypes==1.1.14
+joblib==1.1.0
+nltk==3.7
+pathlib==1.0.1
+PyAudio==0.2.12
+# pypiwin32==223
+pyttsx3==2.90
+# pywin32==304
+regex==2022.8.17
+SpeechRecognition==3.8.1
+tqdm==4.64.0
