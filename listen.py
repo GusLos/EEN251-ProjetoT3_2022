@@ -10,6 +10,7 @@ class Listen:
     def listen(self) -> sr.AudioData:
         with self.microphone as source:
             self.recognizer.adjust_for_ambient_noise(source)
+            print('Escutando...')
             audio = self.recognizer.listen(source)
             return audio
 

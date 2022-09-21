@@ -2,6 +2,8 @@
 # https://pyttsx3.readthedocs.io/en/latest/
 
 import pyttsx3
+from gtts import gTTS
+from playsound import playsound
 
 class speak:
 
@@ -9,10 +11,19 @@ class speak:
       self.engine = pyttsx3.init()
       pass
 
-   def say(self, *phrases: list[str]) -> None:
+   def say_pyttsx3(self, *phrases: list[str]) -> None:
       for phrase in phrases:
          self.engine.say(phrase)
       self.engine.runAndWait()
+      pass
+
+   def say_gtts(self, *phrases: str, language:str = 'pt-br') -> None:
+      for phrase in phrases:
+         text = phrase
+         speech = gTTS(text=text, lang=language, slow=False)
+         speech.save("phrase.mp3")
+         playsound("phrase.mp3")
+         pass
       pass
 
    pass
@@ -75,4 +86,22 @@ class speak:
 
 if __name__ == '__main__':
    talk = speak()
-   talk.say(['Desculpe', 'não entendi', 'pode repetir?'])
+   # talk.say_pyttsx3(['ola'])
+   # talk.say_gtts(['ola'])
+
+
+   # frases = ['Ola', 'vou te ajudar', 'até']
+   # for frase in frases:
+   #    speech = gTTS(text=frase, lang='pt-br', slow=False)
+   #    speech.save("phrase.mp3")
+   #    playsound("phrase.mp3")
+
+   speech = gTTS(text='olá', lang='pt-br', slow=False)
+   speech.save("phrase.mp3")
+   playsound("phrase.mp3")
+   speech = gTTS(text='vou te ajudar', lang='pt-br', slow=False)
+   speech.save("phrase.mp3")
+   playsound("phrase.mp3")
+   speech = gTTS(text='até mais', lang='pt-br', slow=False)
+   speech.save("phrase.mp3")
+   playsound("phrase.mp3")
