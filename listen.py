@@ -7,7 +7,7 @@ class Listen:
         self.microphone = sr.Microphone()
         self.language = language
 
-    def listen(self) -> sr.AudioData:
+    def audio_input(self) -> sr.AudioData:
         with self.microphone as source:
             self.recognizer.adjust_for_ambient_noise(source)
             print('Escutando...')
@@ -24,9 +24,14 @@ class Listen:
             # print("Could not request results from Google Speech Recognition service; {0}".format(e))
             return 'Erro ao processar o audio.'
 
+    def run_listen(self) -> str:
+        audio = self.audio_input()
+        text = self.audio_to_text_google(audio)
+        return text
+
 if __name__ == '__main__':
 
     listen = Listen('pt-BR')
-    audio = listen.listen()
+    audio = listen.audio_input()
     text = listen.audio_to_text_google(audio)
     print(text)

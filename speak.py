@@ -5,7 +5,7 @@ import pyttsx3
 from gtts import gTTS
 from playsound import playsound
 
-class speak:
+class Speak:
 
    def __init__(self) -> None:
       self.engine = pyttsx3.init()
@@ -85,7 +85,7 @@ class speak:
 
 
 if __name__ == '__main__':
-   talk = speak()
+   talk = Speak()
    # talk.say_pyttsx3(['ola'])
    # talk.say_gtts(['ola'])
 
@@ -96,12 +96,12 @@ if __name__ == '__main__':
    #    speech.save("phrase.mp3")
    #    playsound("phrase.mp3")
 
-   speech = gTTS(text='olá', lang='pt-br', slow=False)
-   speech.save("phrase.mp3")
-   playsound("phrase.mp3")
-   speech = gTTS(text='vou te ajudar', lang='pt-br', slow=False)
-   speech.save("phrase.mp3")
-   playsound("phrase.mp3")
-   speech = gTTS(text='até mais', lang='pt-br', slow=False)
-   speech.save("phrase.mp3")
-   playsound("phrase.mp3")
+   # speech = gTTS(text='olá', lang='pt-br', slow=False)
+   # speech.save("phrase.mp3")
+   # playsound("phrase.mp3")
+   # speech = gTTS(text='vou te ajudar', lang='pt-br', slow=False)
+   # speech.save("phrase.mp3")
+   # playsound("phrase.mp3")
+   # speech = gTTS(text='até mais', lang='pt-br', slow=False)
+   # speech.save("phrase.mp3")
+   # playsound("phrase.mp3")
