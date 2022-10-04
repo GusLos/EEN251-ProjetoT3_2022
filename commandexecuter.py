@@ -1,26 +1,27 @@
-from yt_auto import AutoYT
+from browseryt import BrowserYT
 
 class CommandExecutor():
 
     def __init__(self) -> None:
-        self.you_tube = AutoYT()
+        self.you_tube = BrowserYT()
         pass
 
     def execute_command(self, command: dict) -> None:
         if command['tag'] == 'play music':
             self.execute_autoyt(command['arguments'])
-            pass
+        if command['tag'] == 'stop music':
+            self.you_tube.close_youtube()
         else:
             print('Erro: Nada pode ser feito.')
-        pass
 
     def execute_autoyt(self, arguments: str) -> None:
-        self.you_tube.open_youtube()
+        self.you_tube.run_yt_auto(arguments)
         pass
 
     pass
 
 if __name__ == '__main__':
-    di = [1, 2, 4]
-    print(type(di))
+    
+    # di = CommandExecutor().execute_command
+    # di({'tag':'play music', 'arguments':'acas'})
     pass

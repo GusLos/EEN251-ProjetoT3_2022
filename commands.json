@@ -5,8 +5,12 @@
             "patterns": [
                 "acender luz",
                 "ligar luz",
+                "acender a luz",
+                "ligar a luz",
                 "acender led",
-                "ligar led"
+                "ligar led",
+                "acender o led",
+                "ligar o led"
             ],
             "responses": [
                 "Acendendo as luzes",
@@ -24,6 +28,32 @@
             "responses": [
                 "Apagando as luzes",
                 "Desligando as luzes"
+            ]
+        },
+        {
+            "tag": "play music",
+            "patterns": [
+                "colocar para tocar",
+                "tocar",
+                "coloca",
+                "bota",
+                "toca"
+            ],
+            "responses": [
+                "procurando música",
+                "pesquisando música"
+            ]
+        },
+        {
+            "tag": "stop music",
+            "patterns": [
+                "parar música",
+                "parar musica",
+                "silencio"
+            ],
+            "responses": [
+                "Parando música",
+                "música parada"
             ]
         }
     ]

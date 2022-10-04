@@ -1,16 +1,4 @@
-
-def validar(x: str):
-    if (x == 'python'):
-        print('Ola.')
-
+from ia import IA
 
 if __name__ == '__main__':
-
-    op = ''
-    if op == 'python':
-        print('Ola')
-    # while True:
-    #     string = console()
-    #     if string == 'quit':
-    #         break
-    #     pass
+    ia = IA('Python')

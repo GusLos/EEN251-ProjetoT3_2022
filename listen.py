@@ -6,12 +6,14 @@ class Listen:
         self.recognizer = sr.Recognizer()
         self.microphone = sr.Microphone()
         self.language = language
+        # self.recognizer.dynamic_energy_threshold = False
+        
 
-    def audio_input(self) -> sr.AudioData:
+    def audio_input(self, time_limit: int = None) -> sr.AudioData:
         with self.microphone as source:
             self.recognizer.adjust_for_ambient_noise(source)
             print('Escutando...')
-            audio = self.recognizer.listen(source)
+            audio = self.recognizer.listen(source=source, phrase_time_limit=time_limit, timeout=time_limit)
             return audio
 
     def audio_to_text_google(self, audio: sr.AudioData) -> str:
@@ -24,14 +26,34 @@ class Listen:
             # print("Could not request results from Google Speech Recognition service; {0}".format(e))
             return 'Erro ao processar o audio.'
 
-    def run_listen(self) -> str:
-        audio = self.audio_input()
+    def run_listen(self, time_limit: int = None) -> str:
+        audio = self.audio_input(time_limit=time_limit)
         text = self.audio_to_text_google(audio)
         return text
 
 if __name__ == '__main__':
 
     listen = Listen('pt-BR')
-    audio = listen.audio_input()
-    text = listen.audio_to_text_google(audio)
-    print(text)
+    while True:
+        try:
+            audio = listen.audio_input(5)
+            print('interpretando...')
+            text = listen.audio_to_text_google(audio)
+            print(text)
+        except:
+            pass
+    
+    # print(listen.recognizer.dynamic_energy_threshold)
+
+    # with listen.microphone as source:
+    #     listen.recognizer.adjust_for_ambient_noise(source)
+    #     while True:
+    #         print('Escutando...')
+    #         try:
+    #             audio = listen.recognizer.listen(source=source, phrase_time_limit=5, timeout=5)
+    #             print('interpretando...')
+    #             text = listen.audio_to_text_google(audio)
+    #             print(text)
+    #         except:
+    #             pass
+        

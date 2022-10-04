@@ -17,14 +17,14 @@ class Speak:
       self.engine.runAndWait()
       pass
 
-   def say_gtts(self, *phrases: str, language:str = 'pt-br') -> None:
-      for phrase in phrases:
-         text = phrase
-         speech = gTTS(text=text, lang=language, slow=False)
-         speech.save("phrase.mp3")
-         playsound("phrase.mp3")
-         pass
-      pass
+   # def say_gtts(self, phrases: str, language:str = 'pt-br') -> None:
+   #    for phrase in phrases:
+   #       text = phrase
+   #       speech = gTTS(text=text, lang=language, slow=False)
+   #       speech.save("phrase.mp3")
+   #       playsound("phrase.mp3")
+   #       pass
+   #    pass
 
    pass
 
@@ -86,8 +86,10 @@ class Speak:
 
 if __name__ == '__main__':
    talk = Speak()
-   # talk.say_pyttsx3(['ola'])
-   # talk.say_gtts(['ola'])
+   talk.say_pyttsx3(['Olá'])
+   # talk.say_gtts('olá')
+   # input('teste')
+   # talk.say_gtts('e até mais')
 
 
    # frases = ['Ola', 'vou te ajudar', 'até']
