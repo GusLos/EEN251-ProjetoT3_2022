@@ -128,7 +128,8 @@ class BrowserYT():
             if not self.yt_check_ad():
                 self.yt_unmute_video()
             if not self.yt_video_playing():
-                self.close_youtube()
+                # self.close_youtube()
+                self.driver.get('data:,')
                 break 
         pass
 
@@ -139,7 +140,7 @@ class BrowserYT():
 
 if __name__ == '__main__':
     you_tube = BrowserYT()
-    you_tube.run_yt_auto('the batman theme')
+    you_tube.run_yt_auto('miau meme')
     # you_tube.open_youtube()
     # you_tube.search_youtube('marvel spider man theme')
     # you_tube.select_youtube_video()
