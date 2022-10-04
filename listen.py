@@ -32,6 +32,7 @@ class Listen:
 if __name__ == '__main__':
 
     listen = Listen('pt-BR')
-    audio = listen.audio_input()
-    text = listen.audio_to_text_google(audio)
+    # audio = listen.audio_input()
+    # text = listen.audio_to_text_google(audio)
+    text = listen.run_listen()
     print(text)

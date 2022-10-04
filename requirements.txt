@@ -11,3 +11,5 @@ pyttsx3==2.90
 regex==2022.8.17
 SpeechRecognition==3.8.1
 tqdm==4.64.0
+selenium==4.4.3
+#gtts?
