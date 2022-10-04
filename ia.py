@@ -17,10 +17,10 @@ class IA():
 
     def run_IA(self) -> None:
         while True:
-            user_phrase = self.listen()
+            user_phrase = self.listen(5)
             if self.name in user_phrase:
                 self.request_command()
-                user_phrase = self.listen()
+                user_phrase = self.listen(10)
                 user_command = self.understand(user_phrase)
                 responses = user_command['responses']
                 self.speak(random.choice(responses))
