@@ -13,7 +13,6 @@ class BrowserYT():
     def __init__(self) -> None:
         self.driver = webdriver.Chrome('chromedriver.exe')
         self.url = 'https://www.youtube.com/'
-        pass
 
     def open_youtube(self) -> None:
         self.driver.get(self.url)
@@ -66,46 +65,42 @@ class BrowserYT():
         video.click()
 
     def yt_fullscreen_button(self) -> WebElement:
+        """Não é confiavel = NÃO USAR
+        """
         fullscreen_button = self.wait_and_get_clickable_element('//button[@class="ytp-fullscreen-button ytp-button"]')
         fullscreen_button.click()
         return fullscreen_button
 
     def yt_play_button(self) -> WebElement:
+        """Não é confiavel = NÃO USAR
+        """
         play_button = self.wait_and_get_clickable_element('//button[@class="ytp-play-button ytp-button"]',10)
         play_button.click()
         return play_button
 
     def yt_mute_button(self) -> WebElement:
+        """Não é confiavel = NÃO USAR
+        """
         mute_button = self.wait_and_get_clickable_element('//button[@class="ytp-mute-button ytp-button"]')
         mute_button.click()
         return mute_button
 
+    def yt_mute_video(self) -> None:
+        video = self.wait_and_get_element('//div[@id="movie_player"]/div[1]/video') #criar elemento video da classe ? self.video?
+        self.driver.execute_script("arguments[0].muted = true;", video) 
 
+    def yt_unmute_video(self) -> None:
+        video = self.wait_and_get_element('//div[@id="movie_player"]/div[1]/video')#criar elemento video da classe ? self.video?
+        self.driver.execute_script("arguments[0].muted = false;", video) 
 
     def yt_video_playing(self) -> bool:
         player_status = self.driver.execute_script("return document.getElementById('movie_player').getPlayerState()")
         return True if player_status else False
 
-    # def yt_mute(self) -> None:
-    #     video = self.wait_and_get_element('//video[@class="video-stream html5-main-video"]')
-    #     self.driver.execute_script('arguments[0].muted = true;', video)
-    #     pass
-
-
-
-
-
-
     def yt_ad_skip_button(self) -> WebElement:
         ad_skip_button = self.wait_and_get_clickable_element('//button[@class="ytp-ad-skip-button ytp-button"]',0)
         ad_skip_button.click()
         return ad_skip_button
-
-
-    def yt_video(self) -> WebElement:
-        yt_video = self.wait_and_get_element('//video[@class="video-stream html5-main-video"]')
-        return yt_video
-        pass
 
     def yt_promo_skip(self) -> None:
         self.wait_and_get_clickable_element('//yt-button-renderer[@id="dismiss-button"]').click()
@@ -118,100 +113,56 @@ class BrowserYT():
         except:
             return True
 
+    def run_yt_auto(self, query: str) -> None:
+        self.open_youtube()
+        self.search_youtube(query)
+        self.select_youtube_video()
+        self.yt_mute_video()
+        while self.yt_video_playing:
+            if self.yt_check_ad():
+                self.yt_mute_video()
+                try:
+                    self.yt_ad_skip_button()
+                except:
+                    pass        
+            if not self.yt_check_ad():
+                self.yt_unmute_video()
+            if not self.yt_video_playing():
+                self.close_youtube()
+                break 
+        pass
 
-
-    def yt_video_time_duration(self) -> str:
-        # time_duration = self.wait_and_get_element('//span[@class="ytp-time-duration"]')
-        # time_duration = self.find_element('//span[@class="ytp-time-duration"]')
-        time_duration = WebDriverWait(self.driver, 10).until(EC.invisibility_of_element((By.XPATH, '//span[@class="ytp-time-duration"]')))
-        time_duration = self.find_element('//span[@class="ytp-time-duration"]')
-        return time_duration.text
-
-    def yt_video_time_current(self) -> str:
-        # time_current = self.wait_and_get_element('//span[@class="ytp-time-current"]')
-        # time_current = self.find_element('//span[@class="ytp-time-current"]')
-        time_current = WebDriverWait(self.driver, 10).until(EC.invisibility_of_element((By.XPATH, '//span[@class="ytp-time-current"]')))
-        time_current = self.find_element('//span[@class="ytp-time-current"]')
-        return time_current.text
-
+    # def yt_video(self) -> WebElement:
+    #     yt_video = self.wait_and_get_element('//video[@class="video-stream html5-main-video"]')
+    #     return yt_video
     pass
-
-
-# # pause_btn = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH,"//button[@class='ytp-play-button ytp-button']")))
-# # # input()
-# # pause_btn.click()
-# # pause_btn.click()
-
 
 if __name__ == '__main__':
     you_tube = BrowserYT()
-    you_tube.open_youtube()
-    you_tube.search_youtube('free bird')
-    you_tube.select_youtube_video()
-    # you_tube.yt_mute_button()
-
-    # WebDriverWait(you_tube.driver, 10).until(EC.presence_of_element_located((By.XPATH, '//div[@id="movie_player"]/div[1]/video')))
-    # video = you_tube.driver.find_element(By.XPATH, '//div[@id="movie_player"]/div[1]/video')
-    video = you_tube.wait_and_get_element('//div[@id="movie_player"]/div[1]/video')
+    you_tube.run_yt_auto('the batman theme')
+    # you_tube.open_youtube()
+    # you_tube.search_youtube('marvel spider man theme')
+    # you_tube.select_youtube_video()
     
-    while not you_tube.driver.execute_script('return arguments[0].paused;', video):
-        you_tube.driver.execute_script('arguments[0].pause();', video)
+    # while not you_tube.driver.execute_script('return arguments[0].paused;', video):
+    #     you_tube.driver.execute_script('arguments[0].pause();', video)
 
-    WebDriverWait(you_tube.driver, 10).until(EC.presence_of_element_located((By.XPATH, '//button[@class="ytp-mute-button ytp-button"]')))
-    you_tube.driver.execute_script("arguments[0].play();", video)
-    status_p = you_tube.driver.execute_script('return document.readyState;')
-    print(f'Página está: {status_p}')
-    input('aperte algo (enter)')
+    # you_tube.driver.execute_script("arguments[0].play();", video)
+    # status_p = you_tube.driver.execute_script('return document.readyState;')
+    # print(f'Página está: {status_p}')
 
-    you_tube.driver.execute_script("arguments[0].muted = true;", video)
+    # you_tube.yt_mute_video()
 
-    
-
-
-
-    # yt_video = you_tube.wait_and_get_element('//video[@class="video-stream html5-main-video"]')
-    # yt_video.click()
-    # you_tube.driver.implicitly_wait(5)
-    # if you_tube.yt_check_ad():
-    #     print('\n\nTem anuncio\n\n')
-    #     while True:
+    # while you_tube.yt_video_playing:
+    #     if you_tube.yt_check_ad():
+    #         you_tube.yt_mute_video()
     #         try:
     #             you_tube.yt_ad_skip_button()
     #         except:
-    #             pass
-    #         if not you_tube.yt_check_ad():
-    #             print('\n\nAcabou o anuncio\n\n')
-    #             you_tube.yt_promo_skip()
-    #             # you_tube.yt_mute_button()
-    #             print('sai')
-    #             break
-    # while True:
-    #     try:
-    #         you_tube.yt_ad_skip_button()
-    #     except:
-    #         pass        
+    #             pass        
     #     if not you_tube.yt_check_ad():
-    #         # you_tube.yt_mute_button()
-    #         print('sai')
+    #         # you_tube.driver.execute_script('arguments[0].pause();', video)
+    #         you_tube.yt_unmute_video()
+    #     if not you_tube.yt_video_playing():
+    #         you_tube.close_youtube()
     #         break
-
-
-    # mute_button = you_tube.wait_and_get_clickable_element('//button[@class="ytp-mute-button ytp-button"]')
-    # mute_button.click()
-    # you_tube.yt_mute_button()
-
-    # input('digite algo')
-
-    # mute_button = you_tube.wait_and_get_clickable_element('//button[@class="ytp-mute-button ytp-button"]')
-    # mute_button.send_keys('m')
-
-    # you_tube.yt_mute_button()
-
-    # print('esperando video acabar')
-    # video = you_tube.driver.find_element(By.CSS_SELECTOR, 'video')
-    # you_tube.driver.execute_script("arguments[0].muted = false;", video)
-
-    # while you_tube.yt_video_playing():
-    #     pass
-        
-    # you_tube.close_youtube()
