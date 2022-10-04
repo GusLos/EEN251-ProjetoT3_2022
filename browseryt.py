@@ -1,7 +1,5 @@
 # https://www.askpython.com/python/python-identifiers-rules-best-practices#:~:text=Python%20Identifier%20Naming%20Best%20Practices%20Class%20names%20should,Uppercase%20for%20the%20first%20character%20of%20each%20word.
 
-from typing import Any
-from xmlrpc.client import Boolean
 from selenium.webdriver.remote.webelement import WebElement
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -10,7 +8,7 @@ from selenium.webdriver.support import expected_conditions as EC
 
 from selenium.webdriver.support.ui import Select
 
-class AutoYT:
+class BrowserYT():
 
     def __init__(self) -> None:
         self.driver = webdriver.Chrome('chromedriver.exe')
@@ -84,7 +82,7 @@ class AutoYT:
 
 
 
-    def yt_video_playing(self) -> Boolean:
+    def yt_video_playing(self) -> bool:
         player_status = self.driver.execute_script("return document.getElementById('movie_player').getPlayerState()")
         return True if player_status else False
 
@@ -146,7 +144,7 @@ class AutoYT:
 
 
 if __name__ == '__main__':
-    you_tube = AutoYT()
+    you_tube = BrowserYT()
     you_tube.open_youtube()
     you_tube.search_youtube('free bird')
     you_tube.select_youtube_video()
