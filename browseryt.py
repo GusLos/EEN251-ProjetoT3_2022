@@ -117,9 +117,10 @@ class BrowserYT():
             return True
 
     def run_yt_auto(self, query: str) -> None:
-        self.open_youtube()
-        self.search_youtube(query)
-        self.select_youtube_video()
+        # self.open_youtube()
+        # self.search_youtube(query)
+        # self.select_youtube_video()
+        self.open_yt_video(query)
         self.yt_mute_video()
         while self.yt_video_playing:
             if self.yt_check_ad():
@@ -135,7 +136,10 @@ class BrowserYT():
                 break 
         pass
 
-    # def 
+    def open_yt_video(self, query: str) -> None:
+        self.open_youtube()
+        self.search_youtube(query=query)
+        self.select_youtube_video()
 
     # def yt_video(self) -> WebElement:
     #     yt_video = self.wait_and_get_element('//video[@class="video-stream html5-main-video"]')
@@ -144,7 +148,9 @@ class BrowserYT():
 
 if __name__ == '__main__':
     you_tube = BrowserYT()
-    you_tube.run_yt_auto('miau meme')
+    # you_tube.
+    you_tube.run_yt_auto('free bird')
+    you_tube.quit_youtube()
     # you_tube.open_youtube()
     # you_tube.search_youtube('marvel spider man theme')
     # you_tube.select_youtube_video()
