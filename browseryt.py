@@ -18,6 +18,9 @@ class BrowserYT():
         self.driver.get(self.url)
 
     def close_youtube(self) -> None:
+        self.driver.get('data:,')
+
+    def quit_youtube(self) -> None:
         self.driver.quit()
 
     def find_element(self, xpath: str) -> WebElement:
@@ -128,10 +131,11 @@ class BrowserYT():
             if not self.yt_check_ad():
                 self.yt_unmute_video()
             if not self.yt_video_playing():
-                # self.close_youtube()
-                self.driver.get('data:,')
+                self.close_youtube()
                 break 
         pass
+
+    # def 
 
     # def yt_video(self) -> WebElement:
     #     yt_video = self.wait_and_get_element('//video[@class="video-stream html5-main-video"]')
