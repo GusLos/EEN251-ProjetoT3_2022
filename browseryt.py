@@ -1,4 +1,5 @@
 # https://www.askpython.com/python/python-identifiers-rules-best-practices#:~:text=Python%20Identifier%20Naming%20Best%20Practices%20Class%20names%20should,Uppercase%20for%20the%20first%20character%20of%20each%20word.
+# https://www.w3schools.com/tags/ref_av_dom.asp
 
 from selenium.webdriver.remote.webelement import WebElement
 from selenium import webdriver
@@ -81,6 +82,14 @@ class BrowserYT():
         play_button.click()
         return play_button
 
+    def yt_play_video(self) -> None:
+        # Se video acaba, e usa essa função, ele recomeça 
+        video = self.wait_and_get_element('//div[@id="movie_player"]/div[1]/video')#criar elemento video da classe ? self.video?
+        if (self.driver.execute_script("return arguments[0].paused;", video)):
+            self.driver.execute_script("arguments[0].play();", video)
+        else: 
+            self.driver.execute_script("arguments[0].pause();", video)
+
     def yt_mute_button(self) -> WebElement:
         """Não é confiavel = NÃO USAR
         """
@@ -123,6 +132,9 @@ class BrowserYT():
         while self.yt_video_playing():
             if self.yt_check_ad():
                 self.skip_yt_ad()
+            # x = input('pausar?')
+            # if x == 's':
+            #     self.yt_play_video()
         self.close_youtube()
 
     def open_yt_video(self, query: str) -> None:
