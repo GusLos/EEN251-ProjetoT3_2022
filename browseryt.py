@@ -75,6 +75,10 @@ class BrowserYT():
         fullscreen_button.click()
         return fullscreen_button
 
+    def yt_video_is_paused(self) -> bool:
+        video = self.wait_and_get_element('//div[@id="movie_player"]/div[1]/video')#criar elemento video da classe ? self.video?
+        return self.driver.execute_script("return arguments[0].paused;", video)
+
     def yt_play_button(self) -> WebElement:
         """Não é confiavel = NÃO USAR
         """
@@ -85,7 +89,7 @@ class BrowserYT():
     def yt_play_video(self) -> None:
         # Se video acaba, e usa essa função, ele recomeça 
         video = self.wait_and_get_element('//div[@id="movie_player"]/div[1]/video')#criar elemento video da classe ? self.video?
-        if (self.driver.execute_script("return arguments[0].paused;", video)):
+        if self.yt_video_is_paused():
             self.driver.execute_script("arguments[0].play();", video)
         else: 
             self.driver.execute_script("arguments[0].pause();", video)
