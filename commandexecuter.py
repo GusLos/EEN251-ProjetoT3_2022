@@ -8,15 +8,24 @@ class CommandExecutor():
 
     def execute_command(self, command: dict) -> None:
         if command['tag'] == 'play music':
-            self.execute_autoyt(command['arguments'])
+            self.you_tube.open_yt_video(command['arguments'])
+            return
         if command['tag'] == 'stop music':
             self.you_tube.close_youtube()
+            return
+        if command['tag'] == 'pause/play music':
+            self.you_tube.yt_play_video()
+            return
+        if command['tag'] == 'skip yt ad':
+            self.you_tube.skip_yt_ad()
+        if command['tag'] == 'mute video':
+            self.you_tube.yt_mute_video()
         else:
             print('Erro: Nada pode ser feito.')
 
-    def execute_autoyt(self, arguments: str) -> None:
-        self.you_tube.run_yt_auto(arguments)
-        pass
+    # def execute_autoyt(self, arguments: str) -> None:
+    #     self.you_tube.run_yt_auto(arguments)
+    #     pass
 
     pass
 
