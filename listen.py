@@ -13,10 +13,15 @@ class Listen:
         with self.microphone as source:
             self.recognizer.adjust_for_ambient_noise(source)
             print('Escutando...')
-            audio = self.recognizer.listen(source=source, phrase_time_limit=time_limit, timeout=time_limit)
+            try:
+                audio = self.recognizer.listen(source=source, phrase_time_limit=time_limit, timeout=time_limit)
+            except:
+                audio = None
             return audio
 
     def audio_to_text_google(self, audio: sr.AudioData) -> str:
+        if audio == None:
+            return ''
         try:
             return self.recognizer.recognize_google(audio, language=self.language)
         except sr.UnknownValueError:
