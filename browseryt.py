@@ -105,6 +105,7 @@ class BrowserYT():
         ad_skip_button.click()
         return ad_skip_button
 
+    #   yt_promo_close ?
     def yt_promo_skip(self) -> None:
         self.wait_and_get_clickable_element('//yt-button-renderer[@id="dismiss-button"]').click()
         pass
@@ -117,12 +118,20 @@ class BrowserYT():
             return True
 
     def run_yt_auto(self, query: str) -> None:
-        # self.open_youtube()
-        # self.search_youtube(query)
-        # self.select_youtube_video()
         self.open_yt_video(query)
         self.yt_mute_video()
-        while self.yt_video_playing:
+        while self.yt_video_playing():
+            if self.yt_check_ad():
+                self.skip_yt_ad()
+        self.close_youtube()
+
+    def open_yt_video(self, query: str) -> None:
+        self.open_youtube()
+        self.search_youtube(query=query)
+        self.select_youtube_video()
+
+    def skip_yt_ad(self) -> None:
+        while self.yt_video_playing(): # tirar ou deixar?
             if self.yt_check_ad():
                 self.yt_mute_video()
                 try:
@@ -131,15 +140,7 @@ class BrowserYT():
                     pass        
             if not self.yt_check_ad():
                 self.yt_unmute_video()
-            if not self.yt_video_playing():
-                self.close_youtube()
-                break 
-        pass
-
-    def open_yt_video(self, query: str) -> None:
-        self.open_youtube()
-        self.search_youtube(query=query)
-        self.select_youtube_video()
+                return
 
     # def yt_video(self) -> WebElement:
     #     yt_video = self.wait_and_get_element('//video[@class="video-stream html5-main-video"]')
@@ -148,8 +149,8 @@ class BrowserYT():
 
 if __name__ == '__main__':
     you_tube = BrowserYT()
-    # you_tube.
-    you_tube.run_yt_auto('free bird')
+    # you_tube.sk
+    you_tube.run_yt_auto('marvel spider man theme song')
     you_tube.quit_youtube()
     # you_tube.open_youtube()
     # you_tube.search_youtube('marvel spider man theme')
