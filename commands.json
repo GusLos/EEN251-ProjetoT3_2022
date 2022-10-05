@@ -21,9 +21,13 @@
             "tag": "light off",
             "patterns": [
                 "apagar luz",
+                "apagar a luz",
                 "apagar led",
+                "apagar o led",
                 "desligar luz",
-                "desligar led"
+                "desligar a luz",
+                "desligar led",
+                "desligar o led"
             ],
             "responses": [
                 "Apagando as luzes",
@@ -48,12 +52,46 @@
             "tag": "stop music",
             "patterns": [
                 "parar música",
-                "parar musica",
-                "silencio"
+                "parar"
             ],
             "responses": [
                 "Parando música",
                 "música parada"
+            ]
+        },
+        {
+            "tag": "pause/play music",
+            "patterns": [
+                "pausar música",
+                "despausar música",
+                "pausar",
+                "despausar"
+            ],
+            "responses": [
+                ""
+            ]
+        },
+        {
+            "tag": "skip yt ad",
+            "patterns": [
+                "pular anúncio",
+                "pular propaganda",
+                "ignorar anúncio",
+                "ignorar propaganda"
+            ],
+            "responses": [
+                ""
+            ]
+        },
+        {
+            "tag": "mute video",
+            "patterns": [
+                "tirar som",
+                "tirar o som",
+                "mutar"
+            ],
+            "responses": [
+                ""
             ]
         }
     ]
