@@ -22,6 +22,7 @@ while attempts <3:
         pipmain(['install','pyttsx3'])
         pipmain(['install','PyAudio'])
         pipmain(['install','python-dotenv'])
+        pipmain(['install','paho-mqtt'])
         attempts = 10
     except Exception as  e:
         print(f'Error: {e}')
