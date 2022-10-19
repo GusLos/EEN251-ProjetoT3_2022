@@ -7,3 +7,5 @@ tempCodeRunnerFile.py
 chromedriver.exe
 test_drive.py
 test_drive2.py
+debug.log
+.env
