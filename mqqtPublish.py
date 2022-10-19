@@ -1,6 +1,7 @@
 import paho.mqtt.client as mqttClient
 import json
 from dotenv import dotenv_values
+from time import sleep
 
 env = dotenv_values('.env')
 # print(env['CHAVE_ACESSO'])
@@ -26,7 +27,9 @@ class MqqtPublish ():
     def publishValue(self, variable: str, value: any) -> None:
         payload = json.dumps({variable: {"value":value}})
         # print({variable: {"value":value}})
+        sleep(2)
         self.mqtt_client.publish(self.device, payload)
+
         pass
 
     pass
@@ -63,8 +66,8 @@ class MqqtPublish ():
 
 if __name__ == '__main__':
     pub = MqqtPublish()
-    while True:
-        op = input('\nLuz (0 - desliga | 1 - liga)\n')
-        pub.publishValue('cozinha', op)
-        pass
+    # while True:
+        # op = input('\nLuz (0 - desliga | 1 - liga)\n')
+    pub.publishValue('cozinha', 1)
+        # pass
     pass
