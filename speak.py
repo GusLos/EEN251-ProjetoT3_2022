@@ -2,13 +2,16 @@
 # https://pyttsx3.readthedocs.io/en/latest/
 
 import pyttsx3
-from gtts import gTTS
-from playsound import playsound
+# from gtts import gTTS
+
 
 class Speak:
 
-   def __init__(self) -> None:
-      self.engine = pyttsx3.init()
+   def __init__(self, languageContry: str = 'brazil') -> None:
+      self.engine = pyttsx3.init()     
+      # voices = self.engine.getProperty('voices')
+      self.engine.setProperty('voice', languageContry)
+      self.engine.setProperty('rate',160)
       pass
 
    def say_pyttsx3(self, *phrases: list[str]) -> None:
@@ -86,7 +89,7 @@ class Speak:
 
 if __name__ == '__main__':
    talk = Speak()
-   talk.say_pyttsx3(['Olá'])
+   talk.say_pyttsx3(['Olá','Eu sou um assistente virtual.'])
    # talk.say_gtts('olá')
    # input('teste')
    # talk.say_gtts('e até mais')
