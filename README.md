@@ -23,3 +23,5 @@ Na *branch main*, ao abrir o YouTube, a IA tenta pular automaticamente os anúnc
 Na *branch EEN251*, ao abrir o YouTube, a IA não pula os anúncios e nem tira o som, porém ela não fica travada e consegue receber comandos ainda com o YouTube aberto, com isso, essa branch tem mais comandos disponíveis para interação com o vídeo.
 
 Em ambas as branch fechar a página web que abre com a execução do programa gera erro no programa.
+<br><br><br>
+<sub>A T3 está na branch EEN251-T3</sub>
